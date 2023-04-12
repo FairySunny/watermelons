@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "watermelons",
+  "version": "${version}",
+
+  "name": "Watermelons",
+  "description": "This mod adds watermelons from OMORI.",
+  "authors": [
+    "FairySunny"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "GPL-3.0",
+  "icon": "assets/watermelons/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "icu.sunny.mc.watermelons.WatermelonsMod"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.17",
+    "fabric-api": "*",
+    "minecraft": "~1.19.4",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

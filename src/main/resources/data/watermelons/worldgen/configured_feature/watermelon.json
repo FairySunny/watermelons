@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "weight": 2,
+          "data": {
+            "Name": "watermelons:watermelon"
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "watermelons:rare_watermelon"
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "watermelons:watermimic"
+          }
+        }
+      ]
+    }
+  }
+}

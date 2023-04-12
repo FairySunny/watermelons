@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "watermelons:block/rare_watermelon_top",
+    "side": "watermelons:block/rare_watermelon_side"
+  }
+}
