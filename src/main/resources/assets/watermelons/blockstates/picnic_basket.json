@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "watermelons:block/picnic_basket" },
+    "facing=east": { "model": "watermelons:block/picnic_basket", "y": 90 },
+    "facing=south": { "model": "watermelons:block/picnic_basket", "y": 180 },
+    "facing=west": { "model": "watermelons:block/picnic_basket", "y": 270 }
+  }
+}

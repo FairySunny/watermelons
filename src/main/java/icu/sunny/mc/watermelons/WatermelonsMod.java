@@ -1,5 +1,6 @@
 package icu.sunny.mc.watermelons;
 
+import icu.sunny.mc.watermelons.block.PicnicBasketBlock;
 import icu.sunny.mc.watermelons.block.WatermimicBlock;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -33,7 +34,7 @@ public class WatermelonsMod implements ModInitializer {
 	);
 	public static final Block RARE_WATERMELON = new Block(
 			FabricBlockSettings
-					.of(Material.GOURD)
+					.of(Material.GOURD, MapColor.CYAN)
 					.strength(0.5f)
 					.sounds(BlockSoundGroup.WOOD)
 	);
@@ -41,6 +42,12 @@ public class WatermelonsMod implements ModInitializer {
 			FabricBlockSettings
 					.of(Material.GOURD, MapColor.LIME)
 					.breakInstantly()
+					.sounds(BlockSoundGroup.WOOD)
+	);
+	public static final Block PICNIC_BASKET_BLOCK = new PicnicBasketBlock(
+			FabricBlockSettings
+					.of(Material.WOOD)
+					.strength(1.0f)
 					.sounds(BlockSoundGroup.WOOD)
 	);
 
@@ -56,6 +63,7 @@ public class WatermelonsMod implements ModInitializer {
 		registerBlock("watermelon", WATERMELON);
 		registerBlock("rare_watermelon", RARE_WATERMELON);
 		registerBlock("watermimic", WATERMIMIC_BLOCK);
+		registerBlock("picnic_basket", PICNIC_BASKET_BLOCK);
 
 		BiomeModifications.addFeature(
 				BiomeSelectors.foundInOverworld().or(BiomeSelectors.foundInTheNether()).or(BiomeSelectors.foundInTheEnd()),
