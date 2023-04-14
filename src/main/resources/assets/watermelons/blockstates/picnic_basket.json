@@ -1,8 +1,12 @@
 {
   "variants": {
-    "facing=north": { "model": "watermelons:block/picnic_basket" },
-    "facing=east": { "model": "watermelons:block/picnic_basket", "y": 90 },
-    "facing=south": { "model": "watermelons:block/picnic_basket", "y": 180 },
-    "facing=west": { "model": "watermelons:block/picnic_basket", "y": 270 }
+    "facing=north,food=false": { "model": "watermelons:block/picnic_basket" },
+    "facing=east,food=false": { "model": "watermelons:block/picnic_basket", "y": 90 },
+    "facing=south,food=false": { "model": "watermelons:block/picnic_basket", "y": 180 },
+    "facing=west,food=false": { "model": "watermelons:block/picnic_basket", "y": 270 },
+    "facing=north,food=true": { "model": "watermelons:block/picnic_basket_with_food" },
+    "facing=east,food=true": { "model": "watermelons:block/picnic_basket_with_food", "y": 90 },
+    "facing=south,food=true": { "model": "watermelons:block/picnic_basket_with_food", "y": 180 },
+    "facing=west,food=true": { "model": "watermelons:block/picnic_basket_with_food", "y": 270 }
   }
 }

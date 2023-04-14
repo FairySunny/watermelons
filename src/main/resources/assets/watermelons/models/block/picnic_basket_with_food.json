@@ -6,7 +6,12 @@
     "lid_side": "block/oak_planks",
     "lid_back": "block/oak_planks",
     "lid_front": "watermelons:block/picnic_basket_lid_front",
-    "handle": "block/stripped_oak_log"
+    "handle": "block/stripped_oak_log",
+    "food_0": "block/gold_block",
+    "food_1": "item/apple",
+    "food_2": "block/shroomlight",
+    "food_3": "watermelons:block/rare_watermelon_side",
+    "food_4": "watermelons:block/watermelon_side"
   },
   "elements": [
     {
@@ -189,6 +194,57 @@
         "up":    { "uv": [0, 1, 1, 15], "texture": "#handle" },
         "west":  { "texture": "#handle" },
         "east":  { "texture": "#handle" }
+      }
+    },
+    {
+      "from": [5, 1, 5],
+      "to": [11, 7, 11],
+      "faces": {
+        "up":    { "uv": [5, 5, 11, 11], "texture": "#food_0" },
+        "north": { "uv": [5, 5, 11, 11],  "texture": "#food_0" },
+        "south": { "uv": [5, 5, 11, 11],  "texture": "#food_0" },
+        "west":  { "uv": [5, 5, 11, 11],  "texture": "#food_0" },
+        "east":  { "uv": [5, 5, 11, 11],  "texture": "#food_0" }
+      }
+    },
+    {
+      "from": [2, 1, 6],
+      "to": [5, 4, 9],
+      "faces": {
+        "up":    { "uv": [7, 7, 10, 10], "texture": "#food_1" },
+        "north": { "uv": [7, 7, 10, 10], "texture": "#food_1" },
+        "south": { "uv": [7, 7, 10, 10], "texture": "#food_1" },
+        "west":  { "uv": [7, 7, 10, 10], "texture": "#food_1" }
+      }
+    },
+    {
+      "from": [6, 1, 11],
+      "to": [9, 3, 14],
+      "faces": {
+        "up":    { "texture": "#food_2" },
+        "west":  { "texture": "#food_2" },
+        "east":  { "texture": "#food_2" }
+      }
+    },
+    {
+      "from": [11, 1, 8],
+      "to": [15, 5, 12],
+      "faces": {
+        "up":    { "texture": "#food_3" },
+        "north": { "texture": "#food_3" },
+        "south": { "texture": "#food_3" },
+        "west":  { "texture": "#food_3" }
+      }
+    },
+    {
+      "from": [8, 1, 3],
+      "to": [12, 4, 5],
+      "faces": {
+        "up":    { "texture": "#food_4" },
+        "north": { "texture": "#food_4" },
+        "south": { "texture": "#food_4" },
+        "west":  { "texture": "#food_4" },
+        "east":  { "texture": "#food_4" }
       }
     }
   ]

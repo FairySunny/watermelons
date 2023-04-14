@@ -15,6 +15,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.GenerationStep;
@@ -66,7 +67,7 @@ public class WatermelonsMod implements ModInitializer {
 		registerBlock("picnic_basket", PICNIC_BASKET_BLOCK);
 
 		BiomeModifications.addFeature(
-				BiomeSelectors.foundInOverworld().or(BiomeSelectors.foundInTheNether()).or(BiomeSelectors.foundInTheEnd()),
+				BiomeSelectors.tag(TagKey.of(RegistryKeys.BIOME, new Identifier(MOD_ID, "generates_watermelons"))),
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(MOD_ID, "watermelon"))
 		);
