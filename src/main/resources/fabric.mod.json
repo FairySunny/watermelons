@@ -23,6 +23,7 @@
     ]
   },
   "mixins": [
+    "watermelons.mixins.json"
   ],
 
   "depends": {
