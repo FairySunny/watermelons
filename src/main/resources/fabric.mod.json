@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "icu.sunny.mc.watermelons.WatermelonsMod"
+    ],
+    "client": [
+      "icu.sunny.mc.watermelons.client.WatermelonsModClient"
     ]
   },
   "mixins": [

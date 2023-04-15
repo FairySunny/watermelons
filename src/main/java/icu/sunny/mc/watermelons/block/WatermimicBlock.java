@@ -1,9 +1,9 @@
 package icu.sunny.mc.watermelons.block;
 
+import icu.sunny.mc.watermelons.WatermelonsMod;
+import icu.sunny.mc.watermelons.entity.mob.WatermimicEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.SilverfishEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -15,11 +15,11 @@ public class WatermimicBlock extends Block {
     }
 
     private void spawnWatermimic(ServerWorld world, BlockPos pos) {
-        SilverfishEntity silverfishEntity = EntityType.SILVERFISH.create(world);
-        if (silverfishEntity != null) {
-            silverfishEntity.refreshPositionAndAngles((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5, 0.0f, 0.0f);
-            world.spawnEntity(silverfishEntity);
-            silverfishEntity.playSpawnEffects();
+        WatermimicEntity watermimicEntity = WatermelonsMod.WATERMIMIC_ENTITY.create(world);
+        if (watermimicEntity != null) {
+            watermimicEntity.refreshPositionAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.0f, 0.0f);
+            world.spawnEntity(watermimicEntity);
+            watermimicEntity.playSpawnEffects();
         }
     }
 
