@@ -9,6 +9,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.EnumSet;
 
 public class WatermimicEntity extends HostileEntity {
     public WatermimicEntity(EntityType<? extends WatermimicEntity> entityType, World world) {
@@ -31,9 +34,21 @@ public class WatermimicEntity extends HostileEntity {
     }
 
     private class BlockizeGoal extends Goal {
+        @Nullable
+        private Long startTime;
+
+        BlockizeGoal() {
+            setControls(EnumSet.of(Control.MOVE));
+        }
+
         @Override
         public boolean canStart() {
-            return world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) &&
+            if (startTime == null) {
+                startTime = world.getTime();
+                return false;
+            }
+            return world.getTime() - startTime >= 40L &&
+                    world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) &&
                     getTarget() == null &&
                     getNavigation().isIdle() &&
                     world.getBlockState(getBlockizedPos()).isAir();
