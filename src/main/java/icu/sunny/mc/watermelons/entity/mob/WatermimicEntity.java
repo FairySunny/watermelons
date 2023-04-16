@@ -2,6 +2,7 @@ package icu.sunny.mc.watermelons.entity.mob;
 
 import icu.sunny.mc.watermelons.WatermelonsMod;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.mob.HostileEntity;
@@ -20,6 +21,14 @@ public class WatermimicEntity extends HostileEntity {
 
     private BlockPos getBlockizedPos() {
         return BlockPos.ofFloored(getX(), getY() + 0.5, getZ());
+    }
+
+    private boolean canBlockizeAt(BlockPos pos) {
+        if (!world.getBlockState(pos).isAir()) {
+            return false;
+        }
+        BlockState blockState = world.getBlockState(pos.down());
+        return !blockState.isAir() && blockState.getFluidState().isEmpty();
     }
 
     @Override
@@ -51,13 +60,13 @@ public class WatermimicEntity extends HostileEntity {
                     world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) &&
                     getTarget() == null &&
                     getNavigation().isIdle() &&
-                    world.getBlockState(getBlockizedPos()).isAir();
+                    canBlockizeAt(getBlockizedPos());
         }
 
         @Override
         public void start() {
             BlockPos pos = getBlockizedPos();
-            if (world.getBlockState(pos).isAir()) {
+            if (canBlockizeAt(pos)) {
                 world.setBlockState(pos, WatermelonsMod.WATERMIMIC_BLOCK.getDefaultState(), Block.NOTIFY_ALL);
                 playSpawnEffects();
                 discard();
