@@ -18,6 +18,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -25,14 +26,28 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.world.gen.GenerationStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.stream.Stream;
 
 public class WatermelonsMod implements ModInitializer {
 	public static final String MOD_ID = "watermelons";
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	public static final Item[] KEY_ITEMS = Stream
+			.iterate(0, i -> i + 1)
+			.limit(26)
+			.map(
+					i -> registerItem(
+							"key_" + (char)('a' + i),
+							new Item(new FabricItemSettings().rarity(Rarity.RARE))
+					)
+			)
+			.toArray(Item[]::new);
 
 	public static final Block WATERMELON_BLOCK = registerBlock(
 			"watermelon",
@@ -83,6 +98,11 @@ public class WatermelonsMod implements ModInitializer {
 					.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
 					.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
 	);
+
+	private static Item registerItem(String name, Item item) {
+		Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), item);
+		return item;
+	}
 
 	private static Block registerBlock(String name, Block block) {
 		Registry.register(Registries.BLOCK, new Identifier(MOD_ID, name), block);
