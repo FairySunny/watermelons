@@ -25,9 +25,13 @@
   "item.watermelons.key_x": "X Key",
   "item.watermelons.key_y": "Y Key",
   "item.watermelons.key_z": "Z Key",
+  "item.watermelons.music_disc_tape": "Space Boyfriend's Music Disc",
+  "item.watermelons.music_disc_tape.desc": "Jami Lynne - I Want Nothing More",
   "block.watermelons.watermelon": "Treasure Watermelon",
   "block.watermelons.rare_watermelon": "Rare Treasure Watermelon",
   "block.watermelons.watermimic": "Watermimic",
   "block.watermelons.picnic_basket": "Picnic Basket",
-  "entity.watermelons.watermimic": "Watermimic"
+  "entity.watermelons.watermimic": "Watermimic",
+  "item.watermelons.watermimic_spawn_egg": "Watermimic Spawn Egg",
+  "itemGroup.watermelons.mod_items": "Watermelons Mod Items"
 }

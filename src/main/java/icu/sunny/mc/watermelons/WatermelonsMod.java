@@ -7,6 +7,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -17,14 +19,14 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.world.gen.GenerationStep;
@@ -38,6 +40,8 @@ public class WatermelonsMod implements ModInitializer {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	public static final SoundEvent MUSIC_DISC_TAPE_SOUND = registerSoundEvent("music_disc.tape");
+
 	public static final Item[] KEY_ITEMS = Stream
 			.iterate(0, i -> i + 1)
 			.limit(26)
@@ -48,6 +52,15 @@ public class WatermelonsMod implements ModInitializer {
 					)
 			)
 			.toArray(Item[]::new);
+	public static final Item MUSIC_DISC_TAPE_ITEM = registerItem(
+			"music_disc_tape",
+			new MusicDiscItem(
+					1,
+					MUSIC_DISC_TAPE_SOUND,
+					new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),
+					29
+			)
+	);
 
 	public static final Block WATERMELON_BLOCK = registerBlock(
 			"watermelon",
@@ -99,6 +112,28 @@ public class WatermelonsMod implements ModInitializer {
 					.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0)
 	);
 
+	public static final Item WATERMIMIC_SPAWN_EGG = registerItem(
+			"watermimic_spawn_egg",
+			new SpawnEggItem(
+					WATERMIMIC_ENTITY,
+					0xabff8e,
+					0x92d457,
+					new FabricItemSettings()
+			)
+	);
+
+	public static final ItemGroup MOD_ITEM_GROUP = FabricItemGroup
+			.builder(new Identifier(MOD_ID, "mod_items"))
+			.icon(() -> new ItemStack(WATERMELON_BLOCK))
+			.build();
+
+	private static SoundEvent registerSoundEvent(String name) {
+		Identifier id = new Identifier(MOD_ID, name);
+		SoundEvent soundEvent = SoundEvent.of(id);
+		Registry.register(Registries.SOUND_EVENT, id, soundEvent);
+		return soundEvent;
+	}
+
 	private static Item registerItem(String name, Item item) {
 		Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), item);
 		return item;
@@ -110,7 +145,10 @@ public class WatermelonsMod implements ModInitializer {
 		return block;
 	}
 
-	private static <T extends LivingEntity> EntityType<T> registerLivingEntity(String name, FabricEntityTypeBuilder<T> typeBuilder, DefaultAttributeContainer.Builder attributeBuilder) {
+	private static <T extends LivingEntity> EntityType<T> registerLivingEntity(
+			String name, FabricEntityTypeBuilder<T> typeBuilder,
+			DefaultAttributeContainer.Builder attributeBuilder
+	) {
 		EntityType<T> type = Registry.register(Registries.ENTITY_TYPE, new Identifier(MOD_ID, name), typeBuilder.build());
 		FabricDefaultAttributeRegistry.register(type, attributeBuilder);
 		return type;
@@ -119,6 +157,18 @@ public class WatermelonsMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("WatermelonsMod.onInitialize begin");
+
+		ItemGroupEvents.modifyEntriesEvent(MOD_ITEM_GROUP).register(content -> {
+			content.add(WATERMELON_BLOCK);
+			content.add(WATERMIMIC_BLOCK);
+			content.add(RARE_WATERMELON_BLOCK);
+			content.add(PICNIC_BASKET_BLOCK);
+			for (Item item : KEY_ITEMS) {
+				content.add(item);
+			}
+			content.add(MUSIC_DISC_TAPE_ITEM);
+			content.add(WATERMIMIC_SPAWN_EGG);
+		});
 
 		BiomeModifications.addFeature(
 				BiomeSelectors.tag(TagKey.of(RegistryKeys.BIOME, new Identifier(MOD_ID, "generates_watermelons"))),

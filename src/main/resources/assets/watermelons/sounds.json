@@ -1,0 +1,10 @@
+{
+  "music_disc.tape": {
+    "sounds": [
+      {
+        "name": "watermelons:records/tape",
+        "stream": true
+      }
+    ]
+  }
+}
