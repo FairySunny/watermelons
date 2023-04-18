@@ -28,7 +28,7 @@ public class WatermimicEntityModel<T extends Entity> extends SinglePartEntityMod
     }
 
     private static ModelPartBuilder withTeeth(ModelPartBuilder builder, float offsetY) {
-        builder.uv(0, 0);
+        builder.uv(0, 16);
         for (int i = 0; i < 4; i++) {
             builder.cuboid(-7.0f + 4.0f * i, offsetY, -16.0f, 2.0f, 2.0f, 2.0f);
         }
@@ -57,12 +57,12 @@ public class WatermimicEntityModel<T extends Entity> extends SinglePartEntityMod
                 "bottom",
                 withTeeth(
                         ModelPartBuilder.create()
-                                .uv(0, 0)
+                                .uv(0, 24)
                                 .cuboid(-8.0f, 16.0f, -16.0f, 16.0f, 8.0f, 16.0f),
                         14.0f
                 ),
                 ModelTransform.pivot(0.0f, 0.0f, 8.0f)
         );
-        return TexturedModelData.of(modelData, 64, 32);
+        return TexturedModelData.of(modelData, 64, 64);
     }
 }
