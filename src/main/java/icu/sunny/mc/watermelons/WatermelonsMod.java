@@ -42,6 +42,22 @@ public class WatermelonsMod implements ModInitializer {
 
 	public static final SoundEvent MUSIC_DISC_TAPE_SOUND = registerSoundEvent("music_disc.tape");
 
+	public static final Item TOFU_ITEM = registerItem(
+			"tofu",
+			new Item(
+					new FabricItemSettings()
+							.food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6f).snack().build())
+			)
+	);
+	public static final Item MUSIC_DISC_TAPE_ITEM = registerItem(
+			"music_disc_tape",
+			new MusicDiscItem(
+					1,
+					MUSIC_DISC_TAPE_SOUND,
+					new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),
+					29
+			)
+	);
 	public static final Item[] KEY_ITEMS = Stream
 			.iterate(0, i -> i + 1)
 			.limit(26)
@@ -52,15 +68,6 @@ public class WatermelonsMod implements ModInitializer {
 					)
 			)
 			.toArray(Item[]::new);
-	public static final Item MUSIC_DISC_TAPE_ITEM = registerItem(
-			"music_disc_tape",
-			new MusicDiscItem(
-					1,
-					MUSIC_DISC_TAPE_SOUND,
-					new FabricItemSettings().maxCount(1).rarity(Rarity.RARE),
-					29
-			)
-	);
 
 	public static final Block WATERMELON_BLOCK = registerBlock(
 			"watermelon",
@@ -89,12 +96,21 @@ public class WatermelonsMod implements ModInitializer {
 							.sounds(BlockSoundGroup.WOOD)
 			)
 	);
+	public static final Block TOFU_BLOCK = registerBlock(
+			"tofu_block",
+			new Block(
+					FabricBlockSettings
+							.of(Material.ORGANIC_PRODUCT, MapColor.WHITE)
+							.breakInstantly()
+							.sounds(BlockSoundGroup.MUD)
+			)
+	);
 	public static final Block PICNIC_BASKET_BLOCK = registerBlock(
 			"picnic_basket",
 			new PicnicBasketBlock(
 					FabricBlockSettings
 							.of(Material.WOOD)
-							.strength(1.0f)
+							.strength(3.0f)
 							.sounds(BlockSoundGroup.WOOD)
 			)
 	);
@@ -162,11 +178,13 @@ public class WatermelonsMod implements ModInitializer {
 			content.add(WATERMELON_BLOCK);
 			content.add(WATERMIMIC_BLOCK);
 			content.add(RARE_WATERMELON_BLOCK);
+			content.add(TOFU_BLOCK);
 			content.add(PICNIC_BASKET_BLOCK);
+			content.add(TOFU_ITEM);
+			content.add(MUSIC_DISC_TAPE_ITEM);
 			for (Item item : KEY_ITEMS) {
 				content.add(item);
 			}
-			content.add(MUSIC_DISC_TAPE_ITEM);
 			content.add(WATERMIMIC_SPAWN_EGG);
 		});
 
