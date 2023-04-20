@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
@@ -22,6 +24,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class PicnicBasketBlock extends HorizontalFacingBlock {
     private static final BooleanProperty FOOD = BooleanProperty.of("food");
@@ -59,7 +62,10 @@ public class PicnicBasketBlock extends HorizontalFacingBlock {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
         if (itemStack.isIn(TagKey.of(RegistryKeys.ITEM, new Identifier(WatermelonsMod.MOD_ID, "picnic_basket_food"))) && !state.get(FOOD)) {
-            world.setBlockState(pos, state.with(FOOD, true), NOTIFY_ALL);
+            BlockState newState = state.with(FOOD, true);
+            world.setBlockState(pos, newState, NOTIFY_ALL);
+            world.emitGameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Emitter.of(player, newState));
+            world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.BLOCKS, 1.0f, 1.0f);
             if (!player.getAbilities().creativeMode) {
                 itemStack.decrement(1);
             }
