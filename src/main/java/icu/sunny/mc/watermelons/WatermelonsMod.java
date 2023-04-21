@@ -46,7 +46,7 @@ public class WatermelonsMod implements ModInitializer {
 			"tofu",
 			new Item(
 					new FabricItemSettings()
-							.food(new FoodComponent.Builder().hunger(4).saturationModifier(0.6f).snack().build())
+							.food(new FoodComponent.Builder().hunger(2).saturationModifier(0.6f).snack().build())
 			)
 	);
 	public static final Item MUSIC_DISC_TAPE_ITEM = registerItem(
