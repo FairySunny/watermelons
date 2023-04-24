@@ -9,8 +9,8 @@
     "FairySunny"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/FairySunny/watermelons",
+    "sources": "https://github.com/FairySunny/watermelons"
   },
 
   "license": "GPL-3.0",
@@ -36,6 +36,5 @@
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
   }
 }
